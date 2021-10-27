@@ -5,20 +5,27 @@ import Counter from './composent/Counter';
 
 class App extends React.Component {
   constructor() {
-    super()
+    super() // permet de récupérer les props 
 
     this.state = {
-      count : 0,
+      count1 : 0,
       count2 : 2
     } 
   }
   handelPlusClick = () => {
-    this.setState({count:this.state.count + 1})
+      if (this.state.count1 < 100) {
+        if (this.state.count1 === this.state.count2 - 1) {
+          this.setState({count2: this.state.count2 + 1})
+          this.setState({count1: this.state.count1 +1})
+        }  else {
+          this.setState({count1: this.state.count1 + 1})
+        }
+      }
   }
   handleMinusClick = () => { 
     // Bonus1
-    if (this.state.count > 0)                
-    this.setState({count:this.state.count - 1})
+    if (this.state.count1 > 0)                
+    this.setState({count1:this.state.count1 - 1})
   }
 
 
@@ -30,10 +37,12 @@ class App extends React.Component {
     handleMinusClick2 = () => { 
       
       if (this.state.count2 > 0) {
-        this.setState({count2: this.state.count2 - 1})
-        if (this.state.count1 === this.state.count2) {
+        if (this.state.count1 === this.state.count2 - 1) {
+          this.setState({count2: this.state.count2 - 1})
           this.setState({count1: this.state.count1 - 1})
-        }  
+        }  else {
+          this.setState({count2: this.state.count2 - 1})
+        }
       }
   }
   render(){
@@ -41,8 +50,8 @@ class App extends React.Component {
     
       <div className="App">
         <h1>counter</h1>
-        <Counter count={this.state.count} increment={this.handelPlusClick} substract={this.handleMinusClick}/> {/* il faut appeler la balise comme dans l'import, pour que on puisse afficher le contenu de dans le fichier - le contenue que tu a stoqué dans Counter.js */}
-        <Counter count2={this.state.count2} increment={this.handelPlusClick2} substract={this.handleMinusClick2}/>
+        <Counter count={this.state.count1} increment={this.handelPlusClick} substract={this.handleMinusClick}/> {/* il faut appeler la balise comme dans l'import, pour que on puisse afficher le contenu de dans le fichier - le contenue que tu a stoqué dans Counter.js */}
+        <Counter count={this.state.count2} increment={this.handelPlusClick2} substract={this.handleMinusClick2}/>
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
